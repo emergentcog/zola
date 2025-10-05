@@ -1,0 +1,263 @@
+{% import "macros.html" as macros %}
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta itemprop="name" content="{{config.title}}" />
+    <meta itemprop="description" content="{{config.description}}" />
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{get_url(path="apple-touch-icon.png")}}"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="{{get_url(path="favicon-32x32.png")}}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{{get_url(path="favicon-16x16.png")}}" />
+    <link rel="shortcut icon" href="{{get_url(path="favicon.ico")}}" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{get_url(path="style.css")}}"/>
+
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- Highlight.js Theme -->
+    {% if config.extra.highlightjs.enable %}
+      <link href="https://unpkg.com/highlightjs-badge/highlightjs/styles/{{config.extra.highlightjs.theme}}.css" rel="stylesheet">
+    {% endif %}
+
+    <!-- Page Title -->
+    <title>{{ config.title }}</title>
+
+    <!-- RSS Feed -->
+    {% if config.generate_feed %}
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path=config.feed_filename, trailing_slash=false) }}">
+    {% endif %}
+
+    <!-- Particles.js Inline Styling -->
+    <style>
+      #particles-js {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        background-color: #000;
+      }
+      #spotlight {
+        position: relative;
+        z-index: 1;
+        color: #ffffff;
+        text-align: center;
+        padding: 4rem 1rem;
+        margin-top: 10vh;
+      }
+      #home-title {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 2.5rem;
+        line-height: 1.1;
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: -0.025em;
+        margin: 0;
+      }
+      @media (min-width: 768px) {
+        #home-title {
+          font-size: 3.5rem;
+        }
+      }
+      @media (min-width: 1200px) {
+        #home-title {
+          font-size: 4.5rem;
+        }
+      }
+      #home-subtitle {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.25rem;
+        font-weight: 400;
+        color: #cccccc;
+        margin: 1rem 0 1.5rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.5;
+      }
+      #home-social {
+        margin-top: 1.5rem;
+      }
+      #home-nav {
+        margin-top: 2.5rem;
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+      #home-nav a {
+        color: #aaa;
+        text-decoration: none;
+        font-size: 1rem;
+        transition: color 0.3s ease;
+      }
+      #home-nav a:hover {
+        color: #fff;
+      }
+      body {
+        background: transparent;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+
+  <body id="page">
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
+    <!-- Main Content -->
+    <div id="spotlight" class="animated fadeIn">
+      <div id="home-center">
+        <h1 id="home-title">{{ config.title }}</h1>
+        <p id="home-subtitle">{{ config.extra.home_subtitle }}</p>
+        <div id="home-social">
+          {{ macros::render_social_icons() }}
+        </div>
+        <nav id="home-nav" class="site-nav">
+          {% for s in config.extra.hermit_menu %}
+            <a href="{{ config.base_url ~ s.link }}">{{ s.name }}</a>
+          {% endfor %}
+        </nav>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="home-footer">
+      <p>&copy; {{ now() | date(format="%Y") }}
+        <a href="{{ config.base_url }}">{{ config.extra.author.name }}</a>
+        {% if config.generate_feed %}
+        &#183; <a href="{{ get_url(path=config.feed_filename, trailing_slash=false) }}" target="_blank" title="rss">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss">
+            <path d="M4 11a9 9 0 0 1 9 9"></path>
+            <path d="M4 4a16 16 0 0 1 16 16"></path>
+            <circle cx="5" cy="19" r="1"></circle>
+          </svg>
+        </a>
+        {% endif %}
+      </p>
+    </div>
+
+    <!-- Scripts -->
+
+    <!-- Math Rendering (KaTeX) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"
+            integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"
+            integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+            onload="renderMathInElement(document.body, { delimiters: [ 
+              {left: '$$', right: '$$', display: true}, 
+              {left: '$', right: '$', display: false},
+              {left: '\\[', right: '\\]', display: true}, 
+              {left: '\\(', right: '\\)', display: false}
+            ]});"></script>
+
+    <!-- Highlight.js -->
+    {% if config.extra.highlightjs.enable %}
+      <script src="https://unpkg.com/highlightjs-badge/highlightjs/highlight.pack.js"></script>
+      <script src="https://unpkg.com/highlightjs-badge/highlightjs-badge.min.js"></script>
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          hljs.highlightAll();
+          {% if config.extra.highlightjs.clipboard %}
+            window.highlightJsBadge({
+              copyIconClass: "gg-clipboard",
+              checkIconClass: "gg-check"
+            });
+          {% endif %}
+        });
+      </script>
+    {% endif %}
+
+    <!-- Particles.js from cdnjs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        particlesJS('particles-js', {
+          "particles": {
+            "number": {
+              "value": 35,
+              "density": {
+                "enable": true,
+                "value_area": 800
+              }
+            },
+            "color": {
+              "value": "#ffffff"
+            },
+            "shape": {
+              "type": "circle"
+            },
+            "opacity": {
+              "value": 0.12,
+              "random": false
+            },
+            "size": {
+              "value": 2.5,
+              "random": true
+            },
+            "line_linked": {
+              "enable": true,
+              "distance": 150,
+              "color": "#ffffff",
+              "opacity": 0.08,
+              "width": 1
+            },
+            "move": {
+              "enable": true,
+              "speed": 0.4,
+              "direction": "none",
+              "random": true,
+              "straight": false,
+              "out_mode": "out"
+            }
+          },
+          "interactivity": {
+            "detect_on": "canvas",
+            "events": {
+              "onhover": {
+                "enable": true,
+                "mode": "grab"
+              },
+              "onclick": {
+                "enable": true,
+                "mode": "push"
+              },
+              "resize": true
+            },
+            "modes": {
+              "grab": {
+                "distance": 140,
+                "line_linked": {
+                  "opacity": 0.15
+                }
+              },
+              "push": {
+                "particles_nb": 4
+              }
+            }
+          },
+          "retina_detect": true
+        });
+      });
+    </script>
+
+    <!-- Google Analytics -->
+    {% if config.extra.google_analytics.enable %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ config.extra.google_analytics.id }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '{{ config.extra.google_analytics.id }}');
+    </script>
+    {% endif %}
+  </body>
+</html>

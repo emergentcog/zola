@@ -34,7 +34,3 @@ This license applies to the form and expression of ideas, not their independent 
 It does not restrict fair use, research, or personal exploration.
 It is inspired by libre culture, enactivism, and the belief that understanding mind should belong to no one — and everyone.
 
-
-"Intelligence emerges in the space between."
-
-— Tolga Topal
