@@ -40,6 +40,29 @@
       </button>
     </div>
   </div>
+  	<!-- CCL Metadata -->
+{% if page.extra.structured_data %}
+<script type="application/ld+json">
+{{ page.extra.structured_data | safe }}
+</script>
+{% endif %}
+
+{% if page.extra.canonical_url %}
+<link rel="canonical" href="{{ page.extra.canonical_url }}">
+{% endif %}
+
+<!-- Open Graph -->
+<meta property="og:title" content="{% if page.extra.og_title %}{{ page.extra.og_title }}{% else %}{{ page.title }}{% endif %}">
+<meta property="og:description" content="{% if page.extra.og_description %}{{ page.extra.og_description }}{% else %}{{ page.description }}{% endif %}">
+<meta property="og:url" content="{% if page.extra.og_url %}{{ page.extra.og_url }}{% else %}{{ config.base_url }}{{ page.permalink }}{% endif %}">
+<meta property="og:type" content="{% if page.extra.og_type %}{{ page.extra.og_type }}{% else %}article{% endif %}">
+<meta property="og:site_name" content="{% if page.extra.og_site_name %}{{ page.extra.og_site_name }}{% else %}{{ config.title }}{% endif %}">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="{% if page.extra.twitter_card %}{{ page.extra.twitter_card }}{% else %}summary{% endif %}">
+<meta name="twitter:title" content="{% if page.extra.twitter_title %}{{ page.extra.twitter_title }}{% else %}{{ page.title }}{% endif %}">
+<meta name="twitter:description" content="{% if page.extra.twitter_description %}{{ page.extra.twitter_description }}{% else %}{{ page.description }}{% endif %}">
+{% if page.extra.twitter_site %}<meta name="twitter:site" content="{{ page.extra.twitter_site }}">{% endif %}
 </header>
 <div id="mobile-menu" class="animated fast">
   <ul>
