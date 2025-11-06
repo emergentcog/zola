@@ -37,7 +37,7 @@ hermit_menu = [
 ]
 
 hermit_social = [
-    { name = "email", link = "mailto:root@tolgatopal.info" },
+    { name = "email", link = "mailto:tolga@emergentcognition.org" },
     { name = "github", link = "https://github.com/emergentcog" },
 ]
 
@@ -55,7 +55,7 @@ shortname = "my-supa-dupa-blog"
 
 [extra.author]
 name = "Tolga Topal"
-email = "root@tolgatopal.info"
+email = "info@emergentcognition.org"
 
 [extra.google_analytics]
 enable = false
