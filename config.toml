@@ -37,7 +37,7 @@ hermit_menu = [
 ]
 
 hermit_social = [
-    { name = "email", link = "mailto:info@emergentcognition.org" },
+    { name = "email", link = "mailto:research@emergentcognition.org" },
     { name = "github", link = "https://github.com/emergentcog" },
 ]
 
