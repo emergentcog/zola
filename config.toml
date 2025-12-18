@@ -30,7 +30,7 @@ footer_copyright = ' &#183; <a href="/license" target="_blank" rel="noopener">Co
 hermit_menu = [
     #{ link = "/posts", name = "Posts" },
     #{ link = "/research", name = "Research" },
-    #{ link = "/publications", name = "Publications" },
+    { link = "/publications", name = "Publications" },
     #{ link = "/about", name = "About" },
     #{ link = "/grants", name = "Grants" },
     { link = "/license", name = "CCL" }
